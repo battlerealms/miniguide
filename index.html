@@ -49,6 +49,55 @@ Battle Realms: Zen Edition | Online Mini Guide
       "storageRequirements":"1024 MB",
       "gamePlatform":["PC game"],
 }</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  // Add event listeners to all tab button
+  var tabButtons = document.querySelectorAll('.tab');
+  tabButtons.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+    
+      // Remove glow effect from all tab buttons
+      tabButtons.forEach(function(tab) {
+        tab.classList.remove('active-glow');
+      });
+
+      // Add glow effect to the clicked tab button
+      this.classList.add('active-glow');
+    });
+  });
+
+  // Add active class to the default active tab button
+  document.querySelector('.tab:first-child').classList.add('active');
+
+  // Add glow effect to default active tab button
+  document.querySelector('.tab.active').classList.add('active-glow');
+});
+
+function showContent(topic) {
+  var contentDivs = document.querySelectorAll('.widget .content > div');
+  var tabButtons = document.querySelectorAll('.widget .tab');
+
+  // Remove active class from all content divs
+  contentDivs.forEach(function(div) {
+    div.classList.remove('active');
+  });
+
+  // Remove glow effect from all tab buttons
+  tabButtons.forEach(function(tab) {
+    tab.classList.remove('active-glow');
+  });
+
+  // Add active class to the clicked content div
+  document.getElementById(topic).classList.add('active');
+
+  // Add glow effect to the clicked tab button
+  var clickedTab = document.querySelector('.tab[data-topic="' + topic + '"]');
+  if (clickedTab) {
+    clickedTab.classList.add('active-glow');
+  }
+}
+</script>
 
 
 <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
@@ -228,6 +277,97 @@ input[type='checkbox'] {
   border-bottom-right-radius: 5px;
   padding: .01rem;
 }
+
+ .widget {
+  width: 700px;
+  height: 500px;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  display: flex; /* Use flexbox to align sidebar and content */
+}
+
+.widget .sidebar {
+  width: 200px; /* Set a fixed width for the sidebar */
+  padding: 10px;
+  overflow-y: auto; /* Make the sidebar scrollable vertically */
+}
+
+  .widget .tab {
+    margin-bottom: 5px;
+    padding: 10px;
+    background-color: transparent; /* Make buttons transparent */
+    border: 1px solid orange; /* Add orange border to buttons */
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+    color: orange; /* Change button text color to orange */
+  }
+
+  .widget .tab:hover {
+    background-color: rgba(255, 165, 0, 0.25); /* Add orange glow on hover */
+  }
+  
+  .widget .tab.active-glow {
+    background-color: rgba(255, 165, 0, 0.25); /* Add orange glow on active tabs */
+    color: yellow; /* Change text color to yellow for active tab */
+}
+  
+  .widget .content-wrapper {
+    width: 70%;
+    height: 95%;
+    padding: 10px;
+    background-color: black; /* Change screen color to black */
+    border: 4px solid rgba(255, 165, 0, 0.5); /* Add less bright orange border */
+    border-radius: 5px;
+    overflow: auto; /* Add overflow for scrolling */
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.5); /* Add glowy effect */
+  }
+
+  .widget .content {
+    color: white; /* Change text color to white */
+  }
+
+  .widget .content > div {
+    display: none; /* Hide content divs by default */
+  }
+
+  .widget .content > div.active {
+    display: block; /* Display active content div */
+  }
+  .widget h2 {
+  color: yellow;
+}
+
+/* Scrollbar Customizing */
+.widget .sidebar::-webkit-scrollbar {
+  width: 10px; /* Set the width of the scrollbar */
+}
+
+.widget .sidebar::-webkit-scrollbar-track {
+  background: transparent; /* Set the background color of the scrollbar track */
+}
+
+.widget .sidebar::-webkit-scrollbar-thumb {
+background-color: rgba(255, 191, 0, 0.5); /* Set the color of the scrollbar thumb */
+}
+
+.widget .sidebar::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Set the color of the scrollbar thumb on hover */
+}
+.widget .content-wrapper::-webkit-scrollbar {
+  width: 10px; /* Set the width of the scrollbar */
+}
+
+.widget .content-wrapper::-webkit-scrollbar-track {
+  background: transparent; /* Set the background color of the scrollbar track */
+}
+
+.widget .content-wrapper::-webkit-scrollbar-thumb {
+background-color: rgba(255, 191, 0, 0.5); /* Set the color of the scrollbar thumb */
+}
+
+.widget .content-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Set the color of the scrollbar thumb on hover */
+}
 </style>
 </head>
 
@@ -246,7 +386,7 @@ Version: 1.58.3 (Zen Edition/Steam)<br>
    <div class="wrap-collabsible" style="margin-bottom:0.1rem;padding-top:0.6rem;padding-bottom:1.5rem;font-size:12pt;colspan=12">
   <input id="collapsible00" class="toggle" type="checkbox">
   <label for="collapsible00" class="lbl-toggle" tabindex="0"><strong>
-Last edit: February 20, 2024 (Update 1.58.3 - Feb. 18)
+Last edit: February 21, 2024 (Update 1.58.3 - Feb. 18)
 </strong>
 </label>
     <div class="collapsible-content">
@@ -282,39 +422,98 @@ Steam Early Access version of Battle Realms: Zen Edition<br>[Released: December 
 </tr>
 <tr>
    <tr class="xl151547">
-   <td class="xl261547" colspan="12" style="font-size:14pt;text-align:center;">  <br><div class="wrap-collabsible" style="colspan=12">
-  <input id="collapsible0" class="toggle" type="checkbox">
-  <label for="collapsible0" class="lbl-toggle" tabindex="0"><b><font color="yellow">Understanding the Table</font></b></label>
-    <div class="collapsible-content">
-    <div class="content-inner" style="padding-right:4rem; padding-left:4rem;font-size:12pt">
-<p>
-<b>Damage values</b><br><br>5 types of damage and 5 types of armor respectively.<br><br>Every unit in the game has their own Armor Multipliers (AM) for all 5 damage types. Think of every unit taking <b>standard</b> full damage (100% / 1 AM) from every attack type. Higher values mean <b>weaknesses</b> where as lower values mean <b>resistances</b>.<br><br>
+   <td class="xl261547" colspan="12" style="font-size:14pt;text-align:center;">
+     <div class="widget">
+    <div class="sidebar">
+      <div class="tab" onclick="showContent('topic1')"><b>Understanding the Table</b></div>
+      <div class="tab" onclick="showContent('topic2')">Piercing Damage Redesign (1.58.3)</div>
+      <div class="tab" onclick="showContent('topic3')">Poison</div>
+      <div class="tab" onclick="showContent('topic4')">Siege vs Non Siege</div>
+      <div class="tab" onclick="showContent('topic5')">Flammabity</div>
+      <div class="tab" onclick="showContent('topic6')">Terrain & Environment</div>
+      <div class="tab" onclick="showContent('topic7')">Yin & Yang</div>
+      <div class="tab" onclick="showContent('topic8')">Peasant Generation</div>
+      <div class="tab" onclick="showContent('topic9')">Horses</div>
+    </div>
+    <div class="content-wrapper">
+      <div class="content">
+        <div id="topic1" class="active">
+          <h2>Understanding the Table</h2>
+          <p><b>Damage values</b><br><br>5 types of damage and 5 types of armor respectively.<br><br>Every unit in the game has their own Armor Multipliers (AM) for all 5 damage types. Think of every unit taking <b>standard</b> full damage (100% / 1 AM) from every attack type. Higher values mean <b>weaknesses</b> where as lower values mean <b>resistances</b>.<br><br>
 
 Armor Multiplier value of <b>50%</b> means the unit will take <b>half</b> incoming damage from an attack because it lowers the <b>default</b> armor multiplier from 1 (100%) to 0,5 (50%).<br><br>
 
 A value of <b>200%</b> means the unit will take <b>double</b> damage because it increases the <b>default</b> armor multiplier from 1 (100%) to 2 (200%).<br>
 <u>Weaknesses</u> are marked with <font style="color:yellow">yellow</font> color where as <u>Resistances</u>  are <font style="color:red">red</font>. <u>Neutral</u> values are grey.<br><br>
 This system is based around <font style="color:orange"><strong>multipliers</strong></font>. <br><br>For example, a unit that has cutting damage value at <font style="color:red">25%</font> (strong resistance) is also hit by a <u>negative</u> effect - "<font style="color:white">takes 50% more damage from all attack types</font>", this means the unit will take <font style="color:red">37,5%</font> damage from cutting attacks (moderate (weaker) resistance) <i>[0,25 * 1,5 = 0,375 / rounded to 0,38 by the game]</i>.<br><br> And if the same unit is hit by a positive effect- "<font style="color:white">takes 50% less damage from all attack types</font>", this means the unit will take <font style="color:red">13%</font> damage from cutting attacks (strong resistance) <i>[0,25 * 0,5 = 0,125 / rounded to 0,13 by the game]</i>.<br><br>
-<u><b>SP = Unit is available only in the Single Player campaign.</b></u>
-</p>
-    </div>
-  </div>
-  <br>
-<div class="wrap-collabsible" style="font-size:14pt;colspan=12">
-  <input id="collapsible1" class="toggle" type="checkbox">
-  <label for="collapsible1" class="lbl-toggle" tabindex="0"><b><font color="yellow">Piercing Damage Redesign (1.58.3)</font></b></label>
-  <div class="collapsible-content">
-    <div class="content-inner" style="padding-right:4rem; padding-left:4rem;font-size:12pt">
-<p>
-Piercing armor is now always exactly in the middle between the worst and best possible counters (weakest and strongest armor).<br><br>
+<u><b>SP = Unit is available only in the Single Player campaign.</b></u></p>
+        </div>
+        <div id="topic2">
+          <h2>Piercing Damage Redesign (1.58.3)</h2>
+          <p>Piercing armor is now always exactly in the middle between the worst and best possible counters (weakest and strongest armor).<br><br>
 If a unit's highest armor is <b>25%</b> <i>(takes 25% damage)</i> and lowest armor is <b>150%</b> <i>(takes 150% damage)</i>, then they will take <font color="yellow">(25 + 150)/2= <b><i>88%</i></b></font>  damage from <b>Piercing</b> based attacks.<br><br>
-This is the supposed "lazy" damage type that will always be better than a resistance, but worse than a weakness.
-      </p>
-    </div>
-  </div>
-</div>
-<br>
+This is the supposed "lazy" damage type that will always be better than a resistance, but worse than a weakness.</p>
+        </div>
+        <div id="topic3">
+          <h2>Poison</h2>
+          <p><font style="color:green">Poison</font> is a unique damage trait that bypasses all weaknesses and resistances.<br><br>
+In the legacy version of the game (2001-2002), Poison is interconnected with base damage of units. It takes 50% of units' base damage and distributes it overtime.<br><br>
+Zen Edition has Poison untied from units' base damage. Instead it's applied as additional "pure" damage that is distributed overtime. On top of that, it slows units down by 40% and prevents them from being healed.<br><br>Poisoned units that get healed will have poison removed first, only after that they can be healed normally. If a unit in the process of healing gets hit by poison, the healing effect stops.<br></p>
+        </div>
+        <div id="topic4">
+          <h2>Siege vs Non Siege</h2>
+          <p>TL;DR: If you don't train Siege units, you won't be able to effectively destroy buildings.<br><br>
+• Buildings take 100% damage from any damage type.<br><br>
+• Siege units deal great damage to buildings; Non- Siege units are much less efficient.<br><br>
+• Unit Class will show as Siege in “Smart Tooltips” when selecting units.</p>
+        </div>
+        <div id="topic5">
+          <h2>Flammability</h2>
+          <p>There are 3 types of flammability that define how easy it is to set a building on fire: <b>simple</b> (only watchtowers), <b>medium</b> (all combat/special buildings) and <b>hard</b> (only keeps).<br><br>
 
+Burning buildings launch <b>embers</b>, they slightly damage units and are able to set other buildings on fire. If the fire remains unattended for long it can quickly cause a chain reaction setting your buildings ablaze.<br><br>
+
+Attacking buildings with fire when it's raining will be much less effective, rain will also extinguish any already burning building (and water ricefields).</p>
+        </div>
+        <div id="topic6">
+          <h2>Terrain & Environment</h2>
+          <p>☯ <b>Height (dis)Advantage</b>: TL;DR: The taller unit gains an advantage.<br><br>Height advantage is a damage bonus (or penalty) obtained by units relative to the target they are attacking. This is related to unit heights (base models and their positioning).<br><br>The maximum height damage bonus that can be obtained by units is <b>+25%</b> and the maximum penalty is <b>-25%</b>.<br><br>For example:</br> Warlock vs Archer duking it out on flat terrain will result in Warlock gaining <b>~12% bonus damage</b> against archer because of the height advantage.<br>Archer will be able to neglect that and even come on top (by a tiny bit) if he gets on top of a horse since his height is now above Warlock's.<br>Warlock will be at a big disadvantage fighting <b>the Shale Lord</b> in melee on even ground - the tallest unit in the game. That goes for pretty much any unit. <br><br>Horses, Towers and terrain (cliffs, hills etc.) provide a way to get "above" your enemy and neglect that, and even get bonus damage as a result. Death from above!
+
+<br><br>
+☯ <b>Environment</b>: Units will have decreased speed when climbing hills (increased speed when going down), going through water or forest areas. Trees also obscure units' LOS. There are exceptions for certain unique units. All units will alert birds in the trees when running, essentially giving their position away to the enemy.<br><br>
+
+When it's raining, all buildings will be extinguished and all rice crops will be watered (thus growing back faster). When it's showing, rice crops will be growing back at a decreased rate.</p>
+        </div>
+        <div id="topic7">
+          <h2>Yin & Yang</h2>
+          <p>All <b>Zen-Masters</b> (heroes) and Spirit Wolves have their damage increased by <b>10% per each Yin/Yang</b> the Clan has (<u>not with every Yin/Yang gained in total</u>). Ninja and Monks get a 5% damage increase. <b>Serpent</b> and <b>Lotus</b> follow the <b>Yin</b> where as <b>Dragon</b> and <b>Wolf</b> follow the <b>Yang</b>.<br><br>
+
+The rule for acquiring Yin/Yang is pretty simple: the more effectively you fight, the more Yin/Yang you get. However, the mechanic is deeper than that and depends on many conditions: <b>inflicted/received damag</b>e, <b>how far you fight from your peasant huts</b>, and <b>the amount of points you already have</b>.<br><br>
+
+Building a Town Square will also increase the Yin/Yang generation by <b>25%</b> for all clans.</p>
+        </div>
+       <div id="topic8">
+       <h2>Peasant Generation</h2>
+<p>All peasant huts add +100 rice and +50 water bonus to the maximum resource cap, as well as a <a href="https://youtu.be/Z_ehDsCNrbk" class="simplink">small boost</a> to the peasant generation rate. In the original/legacy game (2001-2002) and in Zen Edition (as of 1.58.2), the boost effect is <b>uncapped</b> and is limited only to the maximum building cap (50 buildings).</p>
+        </div>
+       <div id="topic9">
+       <h2>Horses</h2>
+       <p>
+<b>Horses</b> can be used either as a combat unit, or as an addition to peasants. In both cases, combat or economic power gets increased. Wild horses can be seen on the minimap as brown dots.<br><br>
+
+☯ <b>Combat</b>: Horses give their riders a <b>height bonus</b> and, in some cases, <b>faster attack speed</b>, as well as <b>more survavibility</b> in combat. They are also able to <b>trample</b> (BG, Lotus' steeds burn enemies and buildings) which can be deadly for certain enemy units, however, mounted units will be unable to use their BGs. All clans (except Wolf) have various upgrades to improve their horses.<br><br>
+
+Melee units deal 100% of their damage to <b>horses</b>, missile units deal 100% of their damage to <b>riders</b>. Area Of Effect attacks will deal <b>100% damage to riders and 100% to horses</b>.<br><br>
+
+☯ <b>Economy</b>: Dragon, Serpent and Lotus Peasants can take horses in order to gather more resources. Each horse can carry 45 units of rice or water, any peasant can carry 15 units.
+
+Tamed horses without a host can be taken by anyone. Steal enemy horses and look after yours!
+
+Wolf peasants will always feed horses to their wolves. Wolf units can attack other enemy clans' horses that have no rider.
+      </p>
+        </div>
+      </div>
+      
 <tr>
    <tr class="xl161547"> 
     <td class="xl281547" style="background:#994C00"><b>Dragon Clan</b></td>
