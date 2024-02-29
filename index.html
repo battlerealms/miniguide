@@ -368,6 +368,60 @@ background-color: rgba(255, 191, 0, 0.5); /* Set the color of the scrollbar thum
 .widget .content-wrapper::-webkit-scrollbar-thumb:hover {
   background: #555; /* Set the color of the scrollbar thumb on hover */
 }
+
+.social-link {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  width: 70px;
+  height: 70px;
+
+}
+
+.social-link img {
+  width: 100%;
+  height: auto;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+
+}
+
+.social-link:hover img {
+  opacity: 1;
+}
+
+.bo-tooltip {
+  visibility: hidden;
+  background-color: black;
+  color: orange;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  border: 2px solid orange;
+  box-shadow: 0 0 10px orange;
+}
+
+.bo-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 48%;
+  margin-left: -5px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: orange transparent transparent transparent;
+}
+
+.social-link:hover .bo-tooltip {
+  visibility: visible;
+}
+
 </style>
 </head>
 
@@ -379,9 +433,11 @@ background-color: rgba(255, 191, 0, 0.5); /* Set the color of the scrollbar thum
 <b>Battle Realms Mini-Guide<br>
 Version: 1.58.3 (Zen Edition/Steam)<br>
 <img src="https://i.imgur.com/KGBqfCi.jpg" style="margin-top:20px;margin-right:4px" title="Currently selected: English"/></a>
-<!-- <a href="https://battlerealms.github.io/miniguide_de/" class="langlink">
+<!--
+<a href="https://battlerealms.github.io/miniguide_de/" class="langlink">
 <img src="https://i.imgur.com/ax34OxC.png" style="width:32px;height:22px" title="Switch to German"/>
-</a> -->
+</a>
+-->
    <div class="wrap-collabsible" style="margin-bottom:0.1rem;padding-top:0.6rem;padding-bottom:1.5rem;font-size:14pt;colspan=12">
   <input id="collapsible777" class="toggle" type="checkbox">
   <label for="collapsible777" class="lbl-toggle" tabindex="0"><strong>
@@ -397,7 +453,7 @@ It's pretty easy! Help us help you - you can translate the entries and send it o
    <div class="wrap-collabsible" style="margin-bottom:0.1rem;padding-bottom:1.5rem;font-size:12pt;colspan=12">
   <input id="collapsible00" class="toggle" type="checkbox">
   <label for="collapsible00" class="lbl-toggle" tabindex="0"><strong>
-Last edit: February 23, 2024
+Last edit: February 29, 2024
 </strong>
 </label>
     <div class="collapsible-content">
@@ -410,7 +466,7 @@ Country flag icons by <a href="https://www.iconfinder.com/yummygum" class="simpl
 </div>
 
 
-<a href="https://battlerealms.github.io/miniguide" class="boxlink2" style="margin-bottom:0.8rem;margin-top:0.5rem"><b>Switch to Full Version</b></a><br><br>
+<a href="https://battlerealms.github.io/miniguide" class="boxlink2" style="margin-bottom:0.8rem;margin-top:0.5rem"><b>Full Version Unavailable</b></a><br><br>
 </tr>
 <tr>
 <td class="xl261547" style="font-size:16pt;text-shadow: 0 0 12px rgba(35, 173, 278, 1);text-align:center;box-shadow: 0 0 12px rgba(35, 173, 278, 1);background-color: rgba(8, 14, 44, 0.55)" colspan="12" ><br>
@@ -421,13 +477,38 @@ Steam Early Access version of Battle Realms: Zen Edition<br>[Released: December 
 <tr>
    <tr class="xl151547">
    <td class="xl261547" style="font-size:12pt;text-align:center;" colspan="12"><br>
-<a href="https://discord.gg/battlerealms" class="boxlink">Discord</a>
-<a href="https://facebook.com/BattleRealmsOfficial" class="boxlink">Facebook</a>
-<a href="https://twitter.com/BattleRealmsOff" class="boxlink">Twitter</a>
-<a href="https://twitch.tv/directory/game/Battle%20Realms:%20Zen%20Edition" class="boxlink">Twitch</a>
-<a href="https://www.reddit.com/r/BattleRealms" class="boxlink">Reddit</a>
-<a href="https://battlerealms.fandom.com" class="boxlink">BR Wiki</a>
-<a href="https://www.gog.com/game/battle_realms_winter_of_the_wolf" class="boxlink">Buy on GOG (1.50q/DRM-free).</a>
+  <a href="https://discord.gg/battlerealms" class="social-link">
+    <img src="https://i.imgur.com/e5Rz2mt.png" alt="Social Link">
+    <span class="bo-tooltip">Official BR Discord</span>
+  </a>
+  <a href="https://www.youtube.com/battlerealmsofficial" class="social-link">
+    <img src="https://i.imgur.com/JrtbcWF.png" alt="Social Link">
+    <span class="bo-tooltip">Official BR YouTube</span>
+  </a>
+  <a href="https://facebook.com/BattleRealmsOfficial" class="social-link">
+    <img src="https://i.imgur.com/WeDEvsY.png" alt="Social Link">
+    <span class="bo-tooltip">Official BR Facebook</span>
+  </a>
+  <a href="https://twitter.com/BattleRealmsOff" class="social-link">
+    <img src="https://i.imgur.com/XnUtOwp.png" alt="Social Link">
+    <span class="bo-tooltip">Official BR X (Twitter)</span>
+  </a>
+  <a href="https://twitch.tv/directory/game/Battle%20Realms:%20Zen%20Edition" class="social-link">
+    <img src="https://i.imgur.com/Arm4IOH.png" alt="Social Link">
+    <span class="bo-tooltip">BR:ZE on Twitch</span>
+  </a>
+  <a href="https://www.reddit.com/r/BattleRealms" class="social-link">
+    <img src="https://i.imgur.com/pEf183i.png" alt="Social Link">
+    <span class="bo-tooltip">BR Reddit</span>
+  </a>
+  <a href="https://battlerealms.fandom.com" class="social-link">
+    <img src="https://i.imgur.com/sasjnAg.png" alt="Social Link">
+    <span class="bo-tooltip">BR Wiki</span>
+  </a>
+  <a href="https://battlerealms.fandom.com" class="social-link">
+    <img src="https://i.imgur.com/g4Klgg7.png" alt="Social Link">
+    <span class="bo-tooltip">Buy the Original/Legacy game on GOG (1.50q/DRM-free)</span>
+  </a>
 <br><br>
 </td>
 </tr>
